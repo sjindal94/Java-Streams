@@ -1,0 +1,71 @@
+Java 8
+- Parallel vs asynchronous
+
+
+
+https://martinfowler.com/articles/collection-pipeline/
+https://www.youtube.com/watch?v=0hQvWIdwnw4&t=21s
+
+- Collection pipeline pattern
+- imperative style has accidental complexity
+- funtional style is less complex and easier to parallelize
+- parallel as a master switch
+- stream can be either fully parallel or fully sequential(no segments), going backwards from the terminal operation
+
+
+
+streams										reactive streams
+sequential or parallel 					synch or asynchronous
+
+
+Java1 - Streams
+Java5 - ExecutorService
+
+//Pool induced deadlock
+//WorkStealing - forkJoinPool
+Java7 - fJP
+
+
+Java8 uses fJP for parallelStreams
+
+-- some methods are inherently ordered.
+-- some methods are unordered but may have an ordered counterpart, like forEachOrdered()
+
+-- reduce does not take an initial value, it takes an identity value.
+-- how many threads can I create? --bad question
+-- how many threads should I create?
+-- computation intensive vs IO intensive
+-- for computation intensive: Threads <= #cores
+-- for IO intensive: Threads can be greater than #cores, Threads #T <= 1/(1-blocking factor), 1<= blocking factor<1
+-- -Djava.util.concurrent.ForkJoinPool.common.parallelism = 100
+-- findAny() in parallelStreams() can return arbitary result. Power of parallelism.
+
+Parallelism- Good news: get results faster, Bad news: used more resources, Good news: Don't care about resource utilization
+
+
+CompletableFutures
+-- should be non-blocking
+-- Drawbacks of future, future.get() is blocking.
+-- lessons from javascript.
+---callbacks - lacks consistency, hard to compose (callback hell), hard to deal with errors
+--so javascript introduced Promises
+---resolved, rejected, pending
+
+
+Promises have 2 channels
+data
+error (treat error as another form of data)
+errors are first class citizens
+
+---f---f---------------f------f-------
+		\			  /	
+		  \			/
+-----------f-------f------------------
+
+--failure and errors are like data
+--easy to compose
+
+CompletableFutures in Java is Promises in Javascript
+- they have stages - pipeline of execution
+- stages take a completable future and returns another completable future
+                                                 

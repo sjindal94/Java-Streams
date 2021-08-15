@@ -1,0 +1,69 @@
+https://www.youtube.com/watch?v=kG2SEcl1aMM&t=915s
+
+Java: imperative + object oriented
+Java today: imperative + functional + object oriented
+
+Michael Feather: 
+In OOP we encapsulate the moving parts; in FP we eliminate the moving parts.
+
+
+imperative == tell me what to do and how to do it
+declarative == tell me what to do and *not* how
+
+functional == declarative + higher-order functions
+
+pure functions
+
+external vs internal iterators
+
+imperative style is inherently complex
+
+mutability
+	shared mutability purely evil
+
+Thread th = new Thread(new Runnable){
+	public void run(){ //shared mutable
+
+	}
+}
+
+easier to parallelize
+with streams, sequential and concurrant code structure looks the same
+
+Key characteristics:
+functional programming == functional composition + lazy evaluation
+
+stream is not a datastructure, it is an abstraction of functions
+// Martin Fowler: collection pipeline pattern
+
+
+lazy evaluations
+- if the collect method is absent, map and filter won't work.
+
+
+
+Limitations:
+- single use only
+Streams are like Q-tips. It can throw error such as stream has already been operated upon or closed.
+- single pipeline
+Cannot fork in the middle and say I want the data in two different directions
+It's a single terminal operation
+- how to deal in exceptions
+Good luck. Exceptions are imperative style ideas. Lacks cohesion.
+
+
+
+
+
+
+
+
+Reactive programming
+-- applications/programs that we develop must be really responsive and be able to react to stimuli
+
+OOP has four pillars: Abstraction, encapsulation, inheritance, polymorphism
+Reactive programming: Elastic, message driven
+
+bad question:
+-- how many threads can I create? --bad question
+-- how many threads should I create?
